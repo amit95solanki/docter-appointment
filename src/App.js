@@ -9,10 +9,12 @@ import ThemeProvider from './theme';
 // components
 import { StyledChart } from './components/chart';
 import ScrollToTop from './components/scroll-to-top';
+import Spinner from './components/Spinner';
 
 // ----------------------------------------------------------------------
 
 export default function App() {
+  const loading = false;
   return (
     <HelmetProvider>
       <Provider store={store}>
