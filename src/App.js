@@ -7,19 +7,25 @@ import ThemeProvider from './theme';
 // components
 import { StyledChart } from './components/chart';
 import ScrollToTop from './components/scroll-to-top';
+import Spinner from './components/Spinner';
 
 // ----------------------------------------------------------------------
 
 export default function App() {
+  const loading = false;
   return (
     <HelmetProvider>
       <BrowserRouter>
-        <ThemeProvider>
-          <ScrollToTop />
-          <StyledChart />
+        {loading ? (
+          <Spinner />
+        ) : (
+          <ThemeProvider>
+            <ScrollToTop />
+            <StyledChart />
 
-          <Router />
-        </ThemeProvider>
+            <Router />
+          </ThemeProvider>
+        )}
       </BrowserRouter>
     </HelmetProvider>
   );
