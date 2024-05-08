@@ -23,7 +23,7 @@ const PrivateRoutes = () => {
 
           <Route path="blog" element={<BlogPage />} />
 
-          {/* <Route path="login" element={<LoginPage />} /> */}
+          <Route path="login" element={<LoginPage />} />
 
           <Route path="*" element={<Navigate to="/error/404" />} />
         </Route>

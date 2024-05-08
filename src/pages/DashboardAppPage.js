@@ -3,6 +3,8 @@ import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography } from '@mui/material';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 // components
 import Iconify from '../components/iconify';
 // sections
@@ -23,13 +25,36 @@ import {
 export default function DashboardAppPage() {
   const theme = useTheme();
 
+  const [doctors, setDoctors] = useState([]);
+  // login user data
+  const getUserData = async () => {
+    try {
+      const res = await axios.get('/api/v1/user/getAllDoctors', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      if (res.data.success) {
+        setDoctors(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUserData();
+  }, []);
+
   return (
     <>
       <Helmet>
         <title> Dashboard | Minimal UI </title>
       </Helmet>
 
-      <Container maxWidth="xl">
+      <h1 style={{ textAlign: 'center' }}>HOME PAGE</h1>
+
+      {/* <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>
           Hi, Welcome back
         </Typography>
@@ -213,7 +238,7 @@ export default function DashboardAppPage() {
             />
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
     </>
   );
 }

@@ -1,5 +1,6 @@
 // import { Navigate, useRoutes } from 'react-router-dom';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import SimpleLayout from './layouts/simple';
@@ -14,6 +15,9 @@ import PrivateRoutes from './PrivateRoutes';
 import AuthPage from './dummy/AuthPage';
 import ErrorsPage from './dummy/ErrorsPage';
 import Logout from './dummy/Logout';
+import Spinner from './components/Spinner';
+import ProtectedRoute from './layouts/ProtectedRoute';
+import PublicRoute from './layouts/PublicRoute';
 
 // ----------------------------------------------------------------------
 
@@ -59,22 +63,120 @@ import Logout from './dummy/Logout';
 // }
 
 export default function Router() {
-  const currentUser = true;
+  // const currentUser = true;
+  const { loading } = useSelector((state) => state.alerts);
   return (
-    <Routes>
-      {currentUser ? (
-        <>
-          <Route path="/*" element={<PrivateRoutes />} />
-          <Route index element={<Navigate to="/dashboard" />} />
-        </>
+    <>
+      {loading ? (
+        <Spinner />
       ) : (
-        <>
-          <Route path="auth/*" element={<LoginPage />} />
-          <Route path="*" element={<Navigate to="/auth/login" />} />
-        </>
+        <Routes>
+          {/* <Route
+          path="/apply-doctor"
+          element={
+            <ProtectedRoute>
+              <ApplyDoctor />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute>
+              <Users />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/doctors"
+          element={
+            <ProtectedRoute>
+              <Doctors />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/doctor/profile/:id"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/doctor/book-appointment/:doctorId"
+          element={
+            <ProtectedRoute>
+              <BookingPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notification"
+          element={
+            <ProtectedRoute>
+              <NotificationPage />
+            </ProtectedRoute>
+          }
+        /> */}
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          {/* <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <Register />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/appointments"
+          element={
+            <ProtectedRoute>
+              <Appointments />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/doctor-appointments"
+          element={
+            <ProtectedRoute>
+              <DoctorAppointments />
+            </ProtectedRoute>
+          }
+        /> */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <DashboardAppPage />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
       )}
-      <Route path="error/*" element={<ErrorsPage />} />
-      <Route path="logout" element={<Logout />} />
-    </Routes>
+    </>
   );
 }
+
+// <Routes>
+//   {currentUser ? (
+//     <>
+//       <Route path="/*" element={<PrivateRoutes />} />
+//       <Route index element={<Navigate to="/dashboard" />} />
+//     </>
+//   ) : (
+//     <>
+//       <Route path="auth/*" element={<LoginPage />} />
+//       <Route path="*" element={<Navigate to="/auth/login" />} />
+//     </>
+//   )}
+//   <Route path="error/*" element={<ErrorsPage />} />
+//   <Route path="logout" element={<Logout />} />
+// </Routes>

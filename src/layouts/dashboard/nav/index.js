@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 // @mui
 import { styled, alpha } from '@mui/material/styles';
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material';
+import { useSelector } from 'react-redux';
 // mock
 import account from '../../../_mock/account';
 // hooks
@@ -14,6 +15,8 @@ import Scrollbar from '../../../components/scrollbar';
 import NavSection from '../../../components/nav-section';
 //
 import navConfig from './config';
+import { adminMenu, userMenu } from '../../../_mock/constant';
+import SvgColor from '../../../components/svg-color';
 
 // ----------------------------------------------------------------------
 
@@ -36,8 +39,33 @@ Nav.propTypes = {
 
 export default function Nav({ openNav, onCloseNav }) {
   const { pathname } = useLocation();
-
+  const { user } = useSelector((state) => state.user);
   const isDesktop = useResponsive('up', 'lg');
+
+  console.log('user', user);
+
+  const icon = (name) => <SvgColor src={`/assets/icons/navbar/${name}.svg`} sx={{ width: 1, height: 1 }} />;
+
+  const doctorMenu = [
+    {
+      title: 'Home',
+      path: '/',
+      icon: icon('ic_analytics'),
+    },
+    {
+      title: 'Appointments',
+      path: '/doctor-appointments',
+      icon: icon('ic_user'),
+    },
+
+    {
+      title: 'Profile',
+      path: `/doctor/profile/${user?._id}`,
+      icon: icon('ic_user'),
+    },
+  ];
+
+  const SidebarMenu = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
 
   useEffect(() => {
     if (openNav) {
@@ -64,18 +92,18 @@ export default function Nav({ openNav, onCloseNav }) {
 
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
+                {user?.name}
               </Typography>
 
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+                {user?.email}
               </Typography>
             </Box>
           </StyledAccount>
         </Link>
       </Box>
 
-      <NavSection data={navConfig} />
+      <NavSection data={SidebarMenu} />
 
       <Box sx={{ flexGrow: 1 }} />
 
