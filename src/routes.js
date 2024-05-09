@@ -1,24 +1,26 @@
 // import { Navigate, useRoutes } from 'react-router-dom';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 // layouts
-import DashboardLayout from './layouts/dashboard';
-import SimpleLayout from './layouts/simple';
+// import DashboardLayout from './layouts/dashboard';
+// import SimpleLayout from './layouts/simple';
 //
-import BlogPage from './pages/BlogPage';
-import UserPage from './pages/UserPage';
+// import BlogPage from './pages/BlogPage';
+// import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
-import Page404 from './pages/Page404';
-import ProductsPage from './pages/ProductsPage';
+// import Page404 from './pages/Page404';
+// import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
-import PrivateRoutes from './PrivateRoutes';
-import AuthPage from './dummy/AuthPage';
-import ErrorsPage from './dummy/ErrorsPage';
-import Logout from './dummy/Logout';
+// import PrivateRoutes from './PrivateRoutes';
+// import AuthPage from './dummy/AuthPage';
+// import ErrorsPage from './dummy/ErrorsPage';
+// import Logout from './dummy/Logout';
 import Spinner from './components/Spinner';
 import ProtectedRoute from './layouts/ProtectedRoute';
 import PublicRoute from './layouts/PublicRoute';
 import ApplyDoctor from './pages/ApplyDoctor';
+import Docter from './pages/Docter';
+import Users from './pages/Users';
 
 // ----------------------------------------------------------------------
 
@@ -120,6 +122,22 @@ export default function Router() {
             </ProtectedRoute>
           }
         /> */}
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute>
+                <Users />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/docotrs"
+            element={
+              <ProtectedRoute>
+                <Docter />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/apply-doctor"
             element={

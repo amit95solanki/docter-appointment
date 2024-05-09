@@ -34,7 +34,7 @@ export const adminMenu = [
 
   {
     title: 'Doctors',
-    path: '/admin/doctors',
+    path: '/admin/docotrs',
     icon: icon('ic_user'),
   },
   {

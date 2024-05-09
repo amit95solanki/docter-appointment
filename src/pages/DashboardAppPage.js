@@ -1,32 +1,40 @@
 import { Helmet } from 'react-helmet-async';
-import { faker } from '@faker-js/faker';
+import React, { useEffect, useState } from 'react';
+// import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography } from '@mui/material';
+// import { Grid, Container, Typography } from '@mui/material';
+import { Navigate } from 'react-router-dom';
+
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/features/userSlice';
+
 // components
-import Iconify from '../components/iconify';
+// import Iconify from '../components/iconify';
 // sections
-import {
-  AppTasks,
-  AppNewsUpdate,
-  AppOrderTimeline,
-  AppCurrentVisits,
-  AppWebsiteVisits,
-  AppTrafficBySite,
-  AppWidgetSummary,
-  AppCurrentSubject,
-  AppConversionRates,
-} from '../sections/@dashboard/app';
+// import {
+//   AppTasks,
+//   AppNewsUpdate,
+//   AppOrderTimeline,
+//   AppCurrentVisits,
+//   AppWebsiteVisits,
+//   AppTrafficBySite,
+//   AppWidgetSummary,
+//   AppCurrentSubject,
+//   AppConversionRates,
+// } from '../sections/@dashboard/app';
 
 // ----------------------------------------------------------------------
 
 export default function DashboardAppPage() {
   const theme = useTheme();
 
+  const dispatch = useDispatch();
+
   const [doctors, setDoctors] = useState([]);
-  // login user data
+
   const getUserData = async () => {
     try {
       const res = await axios.get(`https://docter-appointment-amit-backend.vercel.app/api/v1/user/getAllDoctors`, {
@@ -42,8 +50,34 @@ export default function DashboardAppPage() {
     }
   };
 
+  const getUser = async () => {
+    try {
+      const res = await axios.post(
+        `https://docter-appointment-amit-backend.vercel.app/api/v1/user/getUserData`,
+        { token: localStorage.getItem('token') },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+
+      if (res.data.success) {
+        dispatch(setUser(res.data.data));
+      } else {
+        localStorage.clear();
+        <Navigate to="/login" />;
+      }
+    } catch (error) {
+      localStorage.clear();
+
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    getUserData();
+    // getUserData();
+    getUser();
   }, []);
 
   return (
