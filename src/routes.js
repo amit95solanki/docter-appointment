@@ -18,6 +18,7 @@ import Logout from './dummy/Logout';
 import Spinner from './components/Spinner';
 import ProtectedRoute from './layouts/ProtectedRoute';
 import PublicRoute from './layouts/PublicRoute';
+import ApplyDoctor from './pages/ApplyDoctor';
 
 // ----------------------------------------------------------------------
 
@@ -119,6 +120,14 @@ export default function Router() {
             </ProtectedRoute>
           }
         /> */}
+          <Route
+            path="/apply-doctor"
+            element={
+              <ProtectedRoute>
+                <ApplyDoctor />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/login"
             element={
