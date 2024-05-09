@@ -18,7 +18,7 @@ const ApplyDoctor = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        `${process.env.BASE_URL}/api/v1/user/apply-doctor`,
+        `https://docter-appointment-amit-backend.vercel.app/api/v1/user/apply-doctor`,
         {
           ...values,
           userId: user._id,
