@@ -29,7 +29,7 @@ export default function DashboardAppPage() {
   // login user data
   const getUserData = async () => {
     try {
-      const res = await axios.get('/api/v1/user/getAllDoctors', {
+      const res = await axios.get(`https://docter-appointment-amit-backend.vercel.app/api/v1/user/getAllDoctors`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

@@ -36,7 +36,7 @@ export default function LoginForm() {
       console.log('newUser', newUser);
       try {
         dispatch(showLoading());
-        const res = await axios.post(`${process.env.BASE_URL}/api/v1/user/login`, newUser);
+        const res = await axios.post(`https://docter-appointment-amit-backend.vercel.app/api/v1/user/login`, newUser);
 
         // window.location.reload();
         dispatch(hideLoading());
