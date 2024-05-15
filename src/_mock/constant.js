@@ -17,11 +17,11 @@ export const userMenu = [
     path: '/apply-doctor',
     icon: icon('ic_user'),
   },
-  {
-    title: 'Profile',
-    path: '/profile',
-    icon: icon('ic_user'),
-  },
+  // {
+  //   title: 'Profile',
+  //   path: '/profile',
+  //   icon: icon('ic_user'),
+  // },
 ];
 
 // admin menu
@@ -42,9 +42,9 @@ export const adminMenu = [
     path: '/admin/users',
     icon: icon('ic_user'),
   },
-  {
-    title: 'Profile',
-    path: '/profile',
-    icon: icon('ic_user'),
-  },
+  // {
+  //   title: 'Profile',
+  //   path: '/profile',
+  //   icon: icon('ic_user'),
+  // },
 ];
