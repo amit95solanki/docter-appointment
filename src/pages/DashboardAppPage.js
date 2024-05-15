@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react';
 // import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
-// import { Grid, Container, Typography } from '@mui/material';
+import { Grid, Container, Typography } from '@mui/material';
 import { Navigate } from 'react-router-dom';
 
 import axios from 'axios';
 
 import { useDispatch } from 'react-redux';
+import DocterCardList from '../components/DocterListCard';
 import { setUser } from '../redux/features/userSlice';
 
 // components
@@ -76,7 +77,7 @@ export default function DashboardAppPage() {
   };
 
   useEffect(() => {
-    // getUserData();
+    getUserData();
     getUser();
   }, []);
 
@@ -86,7 +87,13 @@ export default function DashboardAppPage() {
         <title> Dashboard | Minimal UI </title>
       </Helmet>
 
-      <h1 style={{ textAlign: 'center' }}>HOME PAGE</h1>
+      <Grid container spacing={3}>
+        {doctors.map((doctor) => (
+          <Grid key={doctor._id} item xs={12} sm={6} md={3}>
+            <DocterCardList doctor={doctor} />
+          </Grid>
+        ))}
+      </Grid>
 
       {/* <Container maxWidth="xl">
         <Typography variant="h4" sx={{ mb: 5 }}>

@@ -21,6 +21,10 @@ import PublicRoute from './layouts/PublicRoute';
 import ApplyDoctor from './pages/ApplyDoctor';
 import Docter from './pages/Docter';
 import Users from './pages/Users';
+import Profile from './pages/Docter/Profile';
+import BookingPage from './pages/BookingPage';
+import Appointments from './pages/Appointments';
+import DoctorAppointments from './pages/Docter/DoctorAppointments';
 
 // ----------------------------------------------------------------------
 
@@ -74,54 +78,54 @@ export default function Router() {
         <Spinner />
       ) : (
         <Routes>
-          {/* <Route
-          path="/apply-doctor"
-          element={
-            <ProtectedRoute>
-              <ApplyDoctor />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            <ProtectedRoute>
-              <Users />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/doctors"
-          element={
-            <ProtectedRoute>
-              <Doctors />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/doctor/profile/:id"
-          element={
-            <ProtectedRoute>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/doctor/book-appointment/:doctorId"
-          element={
-            <ProtectedRoute>
-              <BookingPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/notification"
-          element={
-            <ProtectedRoute>
-              <NotificationPage />
-            </ProtectedRoute>
-          }
-        /> */}
+          <Route
+            path="/appointments"
+            element={
+              <ProtectedRoute>
+                <Appointments />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctor/book-appointment/:doctorId"
+            element={
+              <ProtectedRoute>
+                <BookingPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctor/profile/:id"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctor-appointments"
+            element={
+              <ProtectedRoute>
+                <DoctorAppointments />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/users"
+            element={
+              <ProtectedRoute>
+                <Users />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/docotrs"
+            element={
+              <ProtectedRoute>
+                <Docter />
+              </ProtectedRoute>
+            }
+          />
           <Route
             path="/admin/users"
             element={
@@ -170,14 +174,7 @@ export default function Router() {
             </ProtectedRoute>
           }
         />
-        <Route
-          path="/doctor-appointments"
-          element={
-            <ProtectedRoute>
-              <DoctorAppointments />
-            </ProtectedRoute>
-          }
-        /> */}
+         */}
           <Route
             path="/"
             element={

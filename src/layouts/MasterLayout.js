@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 // @mui
-import { styled } from '@mui/material/styles';
+import { styled, Box } from '@mui/material';
 //
 import Header from './dashboard/header';
 import Nav from './dashboard/nav';
@@ -42,8 +42,7 @@ export default function MasterLayout({ children }) {
       <Nav openNav={open} onCloseNav={() => setOpen(false)} />
 
       <Main>
-        {/* <Outlet /> */}
-        {children}
+        <Box sx={{ padding: '10px' }}>{children}</Box>
       </Main>
     </StyledRoot>
   );
