@@ -62,8 +62,8 @@ const DoctorAppointments = () => {
       dataIndex: 'date',
       render: (text, record) => (
         <span>
-          {moment(record.date).format('DD-MM-YYYY')} &nbsp;
-          {moment(record.time).format('HH:mm')}
+          <span>{moment(record.date).format('DD-MM-YYYY')}</span> &nbsp;
+          {moment(record.time).utcOffset('-05:30').format('HH:mm')}
         </span>
       ),
     },

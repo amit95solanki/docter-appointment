@@ -2,30 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { DatePicker, message, TimePicker } from 'antd';
+import dayjs from 'dayjs';
+
 import moment from 'moment';
-import {
-  CardActionArea,
-  Typography,
-  CardContent,
-  Card,
-  Box,
-  Divider,
-  Grid,
-  Paper,
-  styled,
-  Button,
-} from '@mui/material';
+import { Typography, Box, Grid, Paper, styled, Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { showLoading, hideLoading } from '../redux/features/alertSlice';
 
 const BookingPage = () => {
   const { user } = useSelector((state) => state.user);
   const params = useParams();
-  const [doctors, setDoctors] = useState([]);
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState();
+  const currentDate = dayjs().format('YYYY-MM-DD');
+  const [doctors, setDoctors] = useState(null);
+  const [date, setDate] = useState(currentDate);
+  const [time, setTime] = useState('12:00');
   const [isAvailable, setIsAvailable] = useState(false);
   const dispatch = useDispatch();
+
+  console.log('date', date);
+
+  const format = 'HH:mm';
+
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -33,6 +30,7 @@ const BookingPage = () => {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
+
   // login user data
   const getUserData = async () => {
     try {
@@ -69,7 +67,6 @@ const BookingPage = () => {
       dispatch(hideLoading());
       if (res.data.success) {
         setIsAvailable(true);
-        console.log(isAvailable);
         message.success(res.data.message);
       } else {
         message.error(res.data.message);
@@ -83,10 +80,9 @@ const BookingPage = () => {
   // booking function
   const handleBooking = async () => {
     try {
-      setIsAvailable(true);
-      if (!date && !time) {
+      if (!date || !time) {
         alert('Date & Time Required');
-        return; // Ensure to return after showing the alert
+        return;
       }
       dispatch(showLoading());
       const res = await axios.post(
@@ -117,8 +113,18 @@ const BookingPage = () => {
 
   useEffect(() => {
     getUserData();
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleTimeChange = (value) => {
+    setTime(dayjs(value).format(format));
+  };
+
+  const handleDateChange = (dates) => {
+    // Add a null check for the 'dates' parameter
+
+    setDate(dates?.format('YYYY-MM-DD'));
+  };
 
   return (
     <Box sx={{ border: '2px solid gray', borderRadius: '15px', padding: '20px 5px' }}>
@@ -133,7 +139,7 @@ const BookingPage = () => {
                 <Item>
                   <Box display={'flex'} gap={'10px'} justifyContent={'space-around'}>
                     <Typography variant="subtitle2" gutterBottom>
-                      Docter Name :
+                      Doctor Name :
                     </Typography>
                     <Typography variant="body2" gutterBottom>
                       Dr.{doctors.firstName} {doctors.lastName}
@@ -169,23 +175,14 @@ const BookingPage = () => {
                 <Item sx={{ display: 'flex', justifyContent: 'space-around' }}>
                   <DatePicker
                     aria-required="true"
-                    className="m-2"
                     format="DD-MM-YYYY"
-                    onChange={(value) => {
-                      setDate(moment(value).format('DD-MM-YYYY'));
-                    }}
+                    onChange={handleDateChange}
+                    defaultValue={dayjs(date, 'YYYY/MM/DD')}
                   />
-                  <TimePicker
-                    aria-required="true"
-                    format="HH:mm"
-                    className="mt-3"
-                    onChange={(value) => {
-                      setTime(moment(value).format('HH:mm'));
-                    }}
-                  />
+
+                  <TimePicker defaultValue={dayjs(time, format)} format={format} onChange={handleTimeChange} />
                 </Item>
               </Grid>
-
               <Grid item xs={12} md={12} lg={6}>
                 <Item>
                   <Box display={'flex'} gap={'10px'} justifyContent={'space-around'}>

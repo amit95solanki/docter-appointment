@@ -26,51 +26,7 @@ import BookingPage from './pages/BookingPage';
 import Appointments from './pages/Appointments';
 import DoctorAppointments from './pages/Docter/DoctorAppointments';
 
-// ----------------------------------------------------------------------
-
-// export default function Router() {
-//   const routes = useRoutes([
-//     {
-//       path: '/dashboard',
-//       element: <DashboardLayout />,
-//       children: [
-//         { element: <Navigate to="/dashboard/app" />, index: true },
-//         {
-//           path: 'app',
-//           element: (
-//             <ProtectedRoute>
-//               <DashboardAppPage />
-//             </ProtectedRoute>
-//           ),
-//         },
-//         { path: 'user', element: <UserPage /> },
-//         { path: 'products', element: <ProductsPage /> },
-//         { path: 'blog', element: <BlogPage /> },
-//       ],
-//     },
-//     {
-//       path: 'login',
-//       element: <LoginPage />,
-//     },
-//     {
-//       element: <SimpleLayout />,
-//       children: [
-//         { element: <Navigate to="/dashboard/app" />, index: true },
-//         { path: '404', element: <Page404 /> },
-//         { path: '*', element: <Navigate to="/404" /> },
-//       ],
-//     },
-//     {
-//       path: '*',
-//       element: <Navigate to="/404" replace />,
-//     },
-//   ]);
-
-//   return routes;
-// }
-
 export default function Router() {
-  // const currentUser = true;
   const { loading } = useSelector((state) => state.alerts);
   return (
     <>
@@ -158,23 +114,7 @@ export default function Router() {
               </PublicRoute>
             }
           />
-          {/* <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/appointments"
-          element={
-            <ProtectedRoute>
-              <Appointments />
-            </ProtectedRoute>
-          }
-        />
-         */}
+
           <Route
             path="/"
             element={
@@ -188,19 +128,3 @@ export default function Router() {
     </>
   );
 }
-
-// <Routes>
-//   {currentUser ? (
-//     <>
-//       <Route path="/*" element={<PrivateRoutes />} />
-//       <Route index element={<Navigate to="/dashboard" />} />
-//     </>
-//   ) : (
-//     <>
-//       <Route path="auth/*" element={<LoginPage />} />
-//       <Route path="*" element={<Navigate to="/auth/login" />} />
-//     </>
-//   )}
-//   <Route path="error/*" element={<ErrorsPage />} />
-//   <Route path="logout" element={<Logout />} />
-// </Routes>

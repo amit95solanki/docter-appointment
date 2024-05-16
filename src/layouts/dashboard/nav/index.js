@@ -111,22 +111,22 @@ export default function Nav({ openNav, onCloseNav }) {
         <Stack alignItems="center" spacing={3} sx={{ pt: 5, borderRadius: 2, position: 'relative' }}>
           <Box
             component="img"
-            src="/assets/illustrations/illustration_avatar.png"
+            src="/assets/images/avatars/avatar_24.jpg"
             sx={{ width: 100, position: 'absolute', top: -50 }}
           />
 
           <Box sx={{ textAlign: 'center' }}>
-            <Typography gutterBottom variant="h6">
-              Get more?
+            <Typography gutterBottom variant="subtitle2">
+              Modified and additional functionality added by a Amit Solanki
             </Typography>
 
-            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              From only $69
+            <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+              Template originally created by MUI
             </Typography>
           </Box>
 
-          <Button href="https://material-ui.com/store/items/minimal-dashboard/" target="_blank" variant="contained">
-            Upgrade to Pro
+          <Button href="https://www.linkedin.com/in/amit-solanki-78a427255/" target="_blank" variant="contained">
+            contact
           </Button>
         </Stack>
       </Box>

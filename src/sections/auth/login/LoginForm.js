@@ -7,7 +7,7 @@ import { message } from 'antd';
 import { useDispatch } from 'react-redux';
 
 // @mui
-import { Stack, IconButton, InputAdornment, TextField, Checkbox } from '@mui/material';
+import { Stack, IconButton, InputAdornment, TextField, Checkbox, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import axios from 'axios';
 import { hideLoading, showLoading } from '../../../redux/features/alertSlice';
@@ -27,7 +27,7 @@ export default function LoginForm() {
 
   const formik = useFormik({
     initialValues: {
-      email: 'admin@test.com',
+      email: '',
       password: '123456',
     },
     validationSchema,
@@ -58,6 +58,9 @@ export default function LoginForm() {
     <>
       <form onSubmit={formik.handleSubmit}>
         <Stack spacing={2} sx={{ marginBottom: '20px' }}>
+          <Typography variant="caption" display="block" gutterBottom color={'darkblue'} textAlign={'center'}>
+            Role : user1@test.com , docter1@test.com , admin@test.com.
+          </Typography>
           <TextField
             fullWidth
             id="email"
@@ -92,10 +95,10 @@ export default function LoginForm() {
             }}
           />
         </Stack>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+        {/* <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
           <Checkbox name="remember" label="Remember me" />
           <Link to="/macho-man-shop/forget-password">Forgot password?</Link>
-        </Stack>
+        </Stack> */}
 
         <LoadingButton fullWidth size="large" type="submit" variant="contained">
           Login

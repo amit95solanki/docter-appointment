@@ -45,6 +45,10 @@ export default function NotificationsPopover() {
           },
         }
       );
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
+
       dispatch(hideLoading());
       if (res.data.success) {
         message.success(res.data.message);
@@ -71,6 +75,9 @@ export default function NotificationsPopover() {
           },
         }
       );
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
       dispatch(hideLoading());
       if (res.data.success) {
         message.success(res.data.message);
@@ -150,7 +157,7 @@ export default function NotificationsPopover() {
             {user?.notifcation?.map((notification) => (
               <Box
                 sx={{
-                  margin: '0px 10px',
+                  margin: '10px 10px',
                   padding: '5px',
                   border: '1px solid gray',
                   borderRadius: '15px',
@@ -197,7 +204,7 @@ export default function NotificationsPopover() {
             {user?.seennotification?.map((notification) => (
               <Box
                 sx={{
-                  margin: '0px 10px',
+                  margin: '10px 10px',
                   padding: '5px',
                   border: '1px solid gray',
                   borderRadius: '15px',
